@@ -17,11 +17,8 @@ protected:
 protected:
 	void send(RGB rgb);
 	void brighten(RGB& rgb);
+	void reset();
 	
-	virtual void write_0() = 0;
-	virtual void write_1() = 0;
-	
-	virtual void reset() = 0;
-	virtual void flush() = 0;
-
+	virtual void write_bits(bool *bits, size_t count) = 0;
+	virtual void delay_us(uint32_t us) = 0;
 }; // class WS2812Base

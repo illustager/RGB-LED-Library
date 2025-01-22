@@ -21,8 +21,6 @@ void WS2812Base::show() {
 	for (unsigned i = 0; i < getLEDCount(); ++i) {
 		send(leds[i]);
 	}
-
-	flush();
 }
 
 void WS2812Base::disable() {
@@ -39,20 +37,28 @@ void WS2812Base::disable() {
 	RGBLEDControllerBase::disable();
 }
 
+void WS2812Base::reset() {
+	delay_us(300);
+}
+
 void WS2812Base::send(RGB rgb) {
 	uint32_t value = 0x00000000;
+	bool bits[24] = {0};
 
 	brighten(rgb);
 	value = (((uint32_t)rgb.g << 16) | ((uint32_t)rgb.r << 8) | ((uint32_t)rgb.b));
 	
 	for (int i = 0; i < 24; ++i) {
-		if ((value & 0x800000) != 0) {
-			write_1();
-		} else {
-			write_0();
-		}
+		// if ((value & 0x800000) != 0) {
+		// 	bits[i] = 1;
+		// } else {
+		// 	bits[i] = 0;
+		// }
+		bits[i] = ((value & 0x800000) != 0);
 		value <<= 1;
 	}
+
+	write_bits(bits, 24);
 }
 
 void WS2812Base::brighten(RGB& rgb) {
