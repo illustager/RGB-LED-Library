@@ -59,7 +59,7 @@ int RGBPlayer::play() {
 	int select = 0;
 
 	select = orders[actionOrderSelect][actionOrderIndex];
-	RGBAction *action = actions->at(select);
+	RGBActionBase *action = actions->at(select);
 
 	index = action->act(ledController->getLEDs() + start, action_args);
 

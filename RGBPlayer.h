@@ -11,7 +11,7 @@
 #include "RGBLEDController/RGBLEDControllerBase.h"
 #include "RGBAction/RGBAction.h"
 
-using RGBActionSeries = std::vector<RGBAction*>;
+using RGBActionSeries = std::vector<RGBActionBase*>;
 
 enum class RGBPlayerState {
 	STOP,

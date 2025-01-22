@@ -94,5 +94,3 @@ private:
 	bool prevMove;
 	bool currMove;
 };
-
-using RGBAction = RGBActionBase;
