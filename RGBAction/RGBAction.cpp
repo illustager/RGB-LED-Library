@@ -11,8 +11,9 @@
 // #include "log.h"
 
 // ---------------- RGBActionBase ----------------
-RGBActionBase::RGBActionBase(RGBActionType type, size_t len, std::initializer_list<RGB> colors)
-	: type(type), len(len) {
+RGBActionBase::RGBActionBase(size_t len, std::initializer_list<RGB> colors)
+	: len(len)
+{
 	initial_colors = new RGB[len];
 
 	if (colors.size() > 0) {
@@ -33,7 +34,7 @@ RGBActionBase::~RGBActionBase() {
 
 // ---------------- RGBActionSolid ----------------
 RGBActionSolid::RGBActionSolid(size_t len, std::initializer_list<RGB> colors, unsigned lengthy)
-	: RGBActionBase(RGBActionType::Solid, len, colors), lengthy(lengthy) {
+	: RGBActionBase(len, colors), lengthy(lengthy) {
 }
 
 int RGBActionSolid::act(RGB *leds, int *args) {
@@ -63,7 +64,7 @@ int RGBActionSolid::act(RGB *leds, int *args) {
 
 // ---------------- RGBActionFading ----------------
 RGBActionFading::RGBActionFading(size_t len, std::initializer_list<RGB> colors, std::initializer_list<unsigned> section, unsigned interval)
-	: RGBActionBase(RGBActionType::Fading, len, colors), interval(interval) {
+	: RGBActionBase(len, colors), interval(interval) {
 	switch (section.size()) {
 		case 2:
 			start = *section.begin();
@@ -140,7 +141,7 @@ int RGBActionFading::act(RGB *leds, int *args) {
 
 // ---------------- RGBActionCycle ----------------
 RGBActionCycle::RGBActionCycle(size_t len, std::initializer_list<RGB> colors, unsigned interval, unsigned times, bool isUp)
-	: RGBActionBase(RGBActionType::Cycle, len, colors), interval(interval), times(times), isUp(isUp) {
+	: RGBActionBase(len, colors), interval(interval), times(times), isUp(isUp) {
 }
 
 int RGBActionCycle::act(RGB *leds, int *args) {
@@ -185,7 +186,7 @@ int RGBActionCycle::act(RGB *leds, int *args) {
 
 // ---------------- RGBActionFloating ----------------
 RGBActionFloating::RGBActionFloating(size_t len, std::initializer_list<RGB> colors, unsigned interval, bool isUp)
-	: RGBActionBase(RGBActionType::Floating, len, colors), interval(interval), isUp(isUp) {
+	: RGBActionBase(len, colors), interval(interval), isUp(isUp) {
 }
 
 int RGBActionFloating::act(RGB *leds, int *args) {
@@ -240,7 +241,7 @@ int RGBActionFloating::act(RGB *leds, int *args) {
 
 // ---------------- RGBActionGrowing ----------------
 RGBActionStreaming::RGBActionStreaming(size_t len, std::initializer_list<RGB> colors, unsigned interval, bool isUp, bool prevMove, bool currMove)
-	: RGBActionBase(RGBActionType::Growing, len, colors), interval(interval), isUp(isUp), prevMove(prevMove), currMove(currMove) {
+	: RGBActionBase(len, colors), interval(interval), isUp(isUp), prevMove(prevMove), currMove(currMove) {
 }
 
 int RGBActionStreaming::act(RGB *leds, int *args) {

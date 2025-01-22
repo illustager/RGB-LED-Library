@@ -8,30 +8,18 @@
 
 #pragma once
 
-#include "../RGBLEDController/WS2812.h"
-
-using ScrawlFuncType = void (*)(RGB*, size_t);
-
-enum class RGBActionType {
-	Solid,
-	Fading,
-	Cycle,
-	Floating,
-	Growing,
-	Streaming,
-};
+#include "../RGB.h"
 
 class RGBActionBase {
 protected:
 	RGBActionBase() = delete;
-	RGBActionBase(RGBActionType type, size_t len, std::initializer_list<RGB> colors);
+	RGBActionBase(size_t len, std::initializer_list<RGB> colors);
 	~RGBActionBase();
 
 public:
 	virtual int act(RGB *leds, int *args) = 0;
 
 protected:
-	RGBActionType type;
 	RGB *initial_colors;
 	size_t len;
 	bool isHeritance;
