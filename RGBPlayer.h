@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "RGBLEDController/WS2812.h"
+#include "RGBLEDController/RGBLEDControllerBase.h"
 #include "RGBAction/RGBAction.h"
 
 using RGBActionSeries = std::vector<RGBAction*>;
@@ -22,7 +22,7 @@ enum class RGBPlayerState {
 class RGBPlayer {
 public:
 	RGBPlayer() = delete;
-	RGBPlayer( WS2812 *ws2812,
+	RGBPlayer( RGBLEDControllerBase *ledController,
 	           size_t start,
 			   const RGBActionSeries *actions,
 			   std::initializer_list<std::initializer_list<size_t> > orders );
@@ -37,13 +37,13 @@ public:
 
 	int play();
 
-	void flush();
+	void show();
 
 	void setBrightness(uint8_t brightness);
 	uint8_t getBrightness() const;
 
 private:
-	WS2812 *ws2812;
+	RGBLEDControllerBase *ledController;
 	size_t start;
 	const RGBActionSeries *actions;
 	std::vector<std::vector<size_t> > orders;
