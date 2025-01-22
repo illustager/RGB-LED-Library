@@ -43,3 +43,7 @@ int RGBActionCycle::act(RGB *leds, int *args) {
 
 	return t;
 }
+
+unsigned RGBActionCycle::argsCount() {
+	return 2;
+}

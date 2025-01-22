@@ -28,3 +28,7 @@ int RGBActionSolid::act(RGB *leds, int *args) {
 
 	return ++cnt;
 }
+
+unsigned RGBActionSolid::argsCount() {
+	return 1;
+}

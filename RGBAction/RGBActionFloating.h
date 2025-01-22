@@ -9,6 +9,7 @@ public:
 	~RGBActionFloating() = default;
 
 	int act(RGB *leds, int *args) override;
+	unsigned argsCount() override;
 
 private:
 	unsigned interval;

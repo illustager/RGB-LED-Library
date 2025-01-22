@@ -52,5 +52,5 @@ private:
 	size_t actionOrderSelect;
 	size_t actionOrderIndex;
 
-	int action_args[3];
+	int *action_args;
 };

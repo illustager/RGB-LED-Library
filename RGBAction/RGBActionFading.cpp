@@ -75,3 +75,7 @@ int RGBActionFading::act(RGB *leds, int *args) {
 	
 	return lv;
 }
+
+unsigned RGBActionFading::argsCount() {
+	return 2;
+}

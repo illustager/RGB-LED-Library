@@ -53,3 +53,7 @@ int RGBActionFloating::act(RGB *leds, int *args) {
 
 	return index;
 }
+
+unsigned RGBActionFloating::argsCount() {
+	return 2;
+}

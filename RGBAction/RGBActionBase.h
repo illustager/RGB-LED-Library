@@ -18,6 +18,7 @@ protected:
 
 public:
 	virtual int act(RGB *leds, int *args) = 0;
+	virtual unsigned argsCount() = 0;
 
 protected:
 	RGB *initial_colors;

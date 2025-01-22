@@ -74,3 +74,7 @@ int RGBActionStreaming::act(RGB *leds, int *args) {
 
 	return index;
 }
+
+unsigned RGBActionStreaming::argsCount() {
+	return 2;
+}
