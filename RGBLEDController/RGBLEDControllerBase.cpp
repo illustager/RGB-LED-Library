@@ -30,9 +30,12 @@ void RGBLEDControllerBase::setBrightness(uint8_t brightness) {
 
 void RGBLEDControllerBase::enable() {
 	m_enabled = true;
-	reset();
 }
 
 void RGBLEDControllerBase::disable() {
 	m_enabled = false;
+}
+
+bool RGBLEDControllerBase::isEnabled() {
+	return m_enabled;
 }

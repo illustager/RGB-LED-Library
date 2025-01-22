@@ -10,11 +10,13 @@ public:
 	WS2812Base(const WS2812Base& ws2812) = delete;
 	WS2812Base& operator=(const WS2812Base& ws2812) = delete;
 
-	void reset() override;
 	void show()  override;
 
+	void disable() override;
+
 protected:
-	void send();
+	void send(RGB rgb);
+	void reset();
 	void brighten(RGB& rgb);
 
 	virtual void write_0() = 0;

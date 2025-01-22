@@ -12,8 +12,8 @@ public:
 
 	virtual void enable();
 	virtual void disable();
+	virtual bool isEnabled();
 
-	virtual void reset() = 0;
 	virtual void show()  = 0;
 
 protected:
