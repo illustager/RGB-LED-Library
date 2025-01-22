@@ -10,8 +10,8 @@
 
 // #include "log.h"
 
-RGBPlayer::RGBPlayer(WS2812 *ws2812, size_t start, const RGBActionSeries *actions, std::initializer_list<std::initializer_list<size_t> > orders)
-	: ws2812(ws2812), start(start), actions(actions), state(RGBPlayerState::STOP), actionOrderSelect(0), actionOrderIndex(0) {
+RGBPlayer::RGBPlayer(RGBLEDControllerBase *ledController, size_t start, const RGBActionSeries *actions, std::initializer_list<std::initializer_list<size_t> > orders)
+	: ledController(ledController), start(start), actions(actions), state(RGBPlayerState::STOP), actionOrderSelect(0), actionOrderIndex(0) {
 
 	this->orders.reserve(orders.size());
 	for (auto &order : orders) {
@@ -34,7 +34,7 @@ void RGBPlayer::stop() {
 	// actionOrderSelect = 0;
 	actionOrderIndex = 0;
 
-	ws2812->disable();
+	ledController->disable();
 }
 
 void RGBPlayer::pause() {
@@ -44,7 +44,7 @@ void RGBPlayer::pause() {
 void RGBPlayer::resume() {
 	state = RGBPlayerState::PLAY;
 
-	ws2812->enable();
+	ledController->enable();
 }
 
 int RGBPlayer::play() {
@@ -61,7 +61,7 @@ int RGBPlayer::play() {
 	select = orders[actionOrderSelect][actionOrderIndex];
 	RGBAction *action = actions->at(select);
 
-	index = action->act(ws2812->getLEDs() + start, action_args);
+	index = action->act(ledController->getLEDs() + start, action_args);
 
 	// log_i("Action %d: %d by order %d", select, index, actionOrderIndex);
 
@@ -72,15 +72,15 @@ int RGBPlayer::play() {
 		action = actions->at(select);
 		action->act(nullptr, action_args);
 
-		index = action->act(ws2812->getLEDs() + start, action_args);
+		index = action->act(ledController->getLEDs() + start, action_args);
 		// log_i("Action %d: %d by order %d", select, index, actionOrderIndex);
 	}
 
 	return index;
 }
 
-void RGBPlayer::flush() {
-	ws2812->flush();
+void RGBPlayer::show() {
+	ledController->show();
 }
 
 void RGBPlayer::next() {
@@ -102,9 +102,9 @@ void RGBPlayer::prev() {
 }
 
 void RGBPlayer::setBrightness(uint8_t brightness) {
-	ws2812->setBrightness(brightness);
+	ledController->setBrightness(brightness);
 }
 
 uint8_t RGBPlayer::getBrightness() const {
-	return ws2812->getBrightness();
+	return ledController->getBrightness();
 }
