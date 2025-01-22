@@ -17,11 +17,19 @@ RGBPlayer::RGBPlayer(RGBLEDControllerBase *ledController, size_t start, const RG
 	for (auto &order : orders) {
 		this->orders.push_back(std::vector<size_t>(order));
 	}
+
+	unsigned int maxn = 0;
+	for (size_t i = 0; i < actions->size(); ++i) {
+		maxn = std::max(maxn, actions->at(i)->argsCount());
+	}
+
+	action_args = new int[maxn];
+
 	stop();
 }
 
 RGBPlayer::~RGBPlayer() {
-	;
+	delete[] action_args;
 }
 
 void RGBPlayer::stop() {
@@ -59,7 +67,7 @@ int RGBPlayer::play() {
 	int select = 0;
 
 	select = orders[actionOrderSelect][actionOrderIndex];
-	RGBAction *action = actions->at(select);
+	RGBActionBase *action = actions->at(select);
 
 	index = action->act(ledController->getLEDs() + start, action_args);
 
