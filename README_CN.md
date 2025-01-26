@@ -17,7 +17,7 @@
   - [RGBActionBase](#rgbactionbase)
     - [介绍](#介绍-1)
     - [定制自己的灯效动画](#定制自己的灯效动画)
-    - [RGBPlayer](#rgbplayer)
+  - [RGBPlayer](#rgbplayer)
 
 
 
