@@ -286,14 +286,14 @@ const RGBActionSeries actions = {
 MyWS2812 ws2812(112, /*other neccessary args*/);
 
 RGBPlayer player0(&ws2812, 0, &actions, {
-	{0, 1, 2},
-	{3, 4, 5, 6},
+    {0, 1, 2},
+    {3, 4, 5, 6},
     {7, 8, 9},
 });
 
 RGBPlayer player1(&ws2812, 56, &actions, {
-	{0, 1, 2},
-	{3, 4, 5, 6},
+    {0, 1, 2},
+    {3, 4, 5, 6},
     {7, 8, 9},
 });
 
@@ -333,8 +333,8 @@ int main() {
 
 ```c++
 RGBPlayer player1(&ws2812, 56, &actions, {
-	{0, 1, 2},
-	{3, 4, 5, 6},
+    {0, 1, 2},
+    {3, 4, 5, 6},
     {7, 8, 9},
 });
 ```
